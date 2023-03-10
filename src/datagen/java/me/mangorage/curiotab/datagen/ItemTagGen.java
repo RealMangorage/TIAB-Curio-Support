@@ -1,6 +1,6 @@
 package me.mangorage.curiotab.datagen;
 
-import me.mangorage.curiotiab.common.Util;
+import me.mangorage.curiotiab.common.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -18,7 +18,7 @@ public class ItemTagGen extends ItemTagsProvider {
 
     @Override
     protected void addTags() {
-        final var curiosCharmTag = tag(TagKey.create(Util.getTIABDeferredRegistry().getRegistryKey(), new ResourceLocation("curios", "tiab")));
-        curiosCharmTag.add(Util.getTimeInABottle().get());
+        final var curiosCharmTag = tag(TagKey.create(Constants.TIAB_REGISTRY.getRegistryKey(), new ResourceLocation("curios", "tiab")));
+        curiosCharmTag.add(Constants.TIAB_ITEM.get());
     }
 }
