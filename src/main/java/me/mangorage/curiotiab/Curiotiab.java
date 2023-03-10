@@ -1,5 +1,6 @@
 package me.mangorage.curiotiab;
 
+import me.mangorage.curiotiab.common.Util;
 import me.mangorage.curiotiab.common.network.NetworkHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -16,17 +17,18 @@ import static me.mangorage.curiotiab.common.Constants.MODID;
 @Mod(MODID)
 public class Curiotiab {
     public Curiotiab() {
-        //MinecraftForge.EVENT_BUS.addListener(this::enqueueCompatMessages);
+        Util.load();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueCompatMessages);
-
         NetworkHandler.register();
     }
 
     public void enqueueCompatMessages(final InterModEnqueueEvent evt) {
-        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("tiab")
-                .size(1)
-                .icon(new ResourceLocation(MODID, "curios/empty_tiab"))
-                .build());
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
+                () -> new SlotTypeMessage.Builder("tiab")
+                        .size(1)
+                        .icon(new ResourceLocation("curios:slot/empty_tiab"))
+                        .build()
+        );
     }
 
 }

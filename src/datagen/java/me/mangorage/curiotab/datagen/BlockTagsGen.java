@@ -5,8 +5,15 @@ import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
+import static me.mangorage.curiotiab.common.Constants.MODID;
+
 public class BlockTagsGen extends BlockTagsProvider {
-    public BlockTagsGen(DataGenerator p_126511_, String modId, @Nullable ExistingFileHelper existingFileHelper) {
-        super(p_126511_, modId, existingFileHelper);
+    public BlockTagsGen(DataGenerator generator, @Nullable ExistingFileHelper existingFileHelper) {
+        super(generator, MODID, existingFileHelper);
+    }
+
+    @Override
+    protected void addTags() {
+
     }
 }

@@ -1,7 +1,6 @@
 package me.mangorage.curiotab.datagen;
 
-import com.haoict.tiab.Tiab;
-import com.haoict.tiab.registries.ItemRegistry;
+import me.mangorage.curiotiab.common.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -10,14 +9,16 @@ import net.minecraft.tags.TagKey;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
+import static me.mangorage.curiotiab.common.Constants.MODID;
+
 public class ItemTagGen extends ItemTagsProvider {
-    public ItemTagGen(DataGenerator p_126530_, BlockTagsProvider p_126531_, String modId, @Nullable ExistingFileHelper existingFileHelper) {
-        super(p_126530_, p_126531_, modId, existingFileHelper);
+    public ItemTagGen(DataGenerator generator, BlockTagsProvider blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(generator, blockTagsProvider, MODID, existingFileHelper);
     }
 
     @Override
     protected void addTags() {
-        final var curiosCharmTag = tag(TagKey.create(ItemRegistry.ITEMS.getRegistryKey(), new ResourceLocation("curios", "tiab")));
-        curiosCharmTag.add(ItemRegistry.timeInABottleItem.get());
+        final var curiosCharmTag = tag(TagKey.create(Util.getTIABDeferredRegistry().getRegistryKey(), new ResourceLocation("curios", "tiab")));
+        curiosCharmTag.add(Util.getTimeInABottle().get());
     }
 }

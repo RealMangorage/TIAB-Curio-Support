@@ -37,15 +37,13 @@ public class ClientEvent {
             }
 
             Minecraft mc = Minecraft.getInstance();
-
-
             if (ClientRegistry.useTiab.consumeClick() && mc.level != null) {
-                HitResult result = mc.player.pick(3, mc.getPartialTick(), false);
+                HitResult result = mc.player.pick(mc.player.getReachDistance(), mc.getPartialTick(), true);
 
                 if (result instanceof BlockHitResult hit) {
                     BlockPos pos = hit.getBlockPos();
                     NetworkHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(),
-                            new CUseTiab(pos.getX(), pos.getY(), pos.getZ()));
+                            new CUseTiab(hit.getLocation(), hit.getDirection(), hit.getBlockPos(), hit.isInside()));
                 }
             }
         }
