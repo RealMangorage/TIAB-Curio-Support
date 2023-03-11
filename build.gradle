@@ -3,13 +3,9 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
-
-
 group = 'me.mangorage'
 version = '1.0'
 archivesBaseName = 'curiotiab'
-
-
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 sourceSets {

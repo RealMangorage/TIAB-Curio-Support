@@ -11,7 +11,6 @@ import static me.mangorage.curiotiab.common.Constants.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGeneration {
-
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         final var helper = event.getExistingFileHelper();

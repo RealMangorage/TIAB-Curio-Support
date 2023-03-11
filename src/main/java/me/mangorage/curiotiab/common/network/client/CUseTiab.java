@@ -4,6 +4,7 @@ import com.haoict.tiab.registries.ItemRegistry;
 import me.mangorage.curiotiab.common.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -46,7 +47,9 @@ public class CUseTiab {
 
             if (level != null) {
                 if (validate(player, pos)) {
+
                     Optional<SlotResult> slotResult = CuriosApi.getCuriosHelper().findFirstCurio(player, ItemRegistry.timeInABottleItem.get());
+
 
                     if (slotResult.get() != null) {
                         ItemStack stack = slotResult.get().stack();
