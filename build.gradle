@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'me.mangorage'
-version = '1.0'
+version = "${mod_version}"
 archivesBaseName = 'curiotiab'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -53,6 +53,9 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', 'curiotiab'
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
 
             mods {
                 curiotiab {

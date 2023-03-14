@@ -4,8 +4,6 @@ import me.mangorage.curiotiab.common.network.NetworkHandler;
 import me.mangorage.curiotiab.common.network.client.CUseTiab;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -19,8 +17,7 @@ import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = MOD, value = Dist.CLIENT)
 public class ClientRegistry {
-    public static KeyMapping useTiab =
-            new KeyMapping("key.curiotiab.use", org.lwjgl.glfw.GLFW.GLFW_KEY_G, "key.categories.misc");
+    public static KeyMapping useTiab = new KeyMapping("key.curiotiab.use", org.lwjgl.glfw.GLFW.GLFW_KEY_G, "key.categories.misc");
 
     @SubscribeEvent
     public static void registerKeys(final RegisterKeyMappingsEvent evt) {
@@ -36,12 +33,8 @@ public class ClientRegistry {
             }
 
             Minecraft mc = Minecraft.getInstance();
-            if (ClientRegistry.useTiab.consumeClick() && mc.level != null) {
-                HitResult result = mc.player.pick(mc.player.getReachDistance(), mc.getPartialTick(), true);
-
-                if (result instanceof BlockHitResult hit)
-                    NetworkHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(), new CUseTiab(hit));
-            }
+            if (ClientRegistry.useTiab.consumeClick() && mc.level != null)
+                NetworkHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(), new CUseTiab());
         }
     }
 }
