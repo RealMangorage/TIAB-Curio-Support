@@ -9,6 +9,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 
 import java.util.Locale;
 
+import static me.mangorage.curiotiab.client.ClientRegistry.*;
 import static me.mangorage.curiotiab.common.Constants.MODID;
 import static me.mangorage.curiotiab.common.Constants.SLOT_KEY;
 
@@ -19,7 +20,10 @@ public class en_us extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        add(ClientRegistry.useTiab.getName(), "Use time in a bottle");
-        add(SLOT_KEY, "Time in a bottle");
+        add(USE_KEY, "Use time in a bottle");
+        add(TOGGLE_KEY, "Toggle gui overlay element");
+        add(SLOT_KEY, "TIAB curio slot");
+
+        add(CATEGORY_KEY, "Time In A Bottle Curio Support");
     }
 }

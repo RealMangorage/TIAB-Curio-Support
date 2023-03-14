@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'me.mangorage'
-version = "${mod_version}"
+version = "${mod_version}-mc${mc_version}"
 archivesBaseName = 'curiotiab'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -27,7 +27,7 @@ sourceSets {
 }
 
 minecraft {
-    mappings channel: 'parchment', version: '2022.11.27-1.19.2'
+    mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
 
     runs {
         client {
@@ -109,7 +109,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.2.6'
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     compileOnly fg.deobf("curse.maven:time-in-a-bottle-standalone-445025:3879896")
     compileOnly fg.deobf("curse.maven:curios-309927:4418021")
 
