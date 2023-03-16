@@ -1,6 +1,6 @@
 package me.mangorage.curiotiab.common.network.client;
 
-import me.mangorage.curiotiab.common.Util;
+import me.mangorage.curiotiab.common.core.Util;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

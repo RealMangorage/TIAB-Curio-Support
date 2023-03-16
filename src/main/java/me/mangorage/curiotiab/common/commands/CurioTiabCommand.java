@@ -6,14 +6,16 @@ import com.haoict.tiab.utils.SendMessage;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import me.mangorage.curiotiab.common.Constants;
-import me.mangorage.curiotiab.common.Util;
+import me.mangorage.curiotiab.common.core.Constants;
+import me.mangorage.curiotiab.common.core.Util;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.MessageArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 
 public class CurioTiabCommand {
     public static LiteralArgumentBuilder<CommandSourceStack> addTimeCommand = (LiteralArgumentBuilder)((LiteralArgumentBuilder) Commands.literal("addTime").requires((commandSource) -> {
@@ -36,6 +38,11 @@ public class CurioTiabCommand {
             return 0;
         }
     }));
+
+    public static void register(RegisterCommandsEvent event) {
+        event.getDispatcher().register((LiteralArgumentBuilder)((LiteralArgumentBuilder) Commands.literal("curiotiab").then(CurioTiabCommand.addTimeCommand)).then(CurioTiabCommand.removeTimeCommand));
+    }
+
     private static int processTimeCommand(CommandContext<CommandSourceStack> ctx, boolean isAdd) throws CommandSyntaxException {
         Component messageValue = MessageArgument.getMessage(ctx, "seconds");
         CommandSourceStack source = ctx.getSource();
@@ -55,7 +62,7 @@ public class CurioTiabCommand {
 
                 ItemStack tiabCurioItemStack = Util.getTiabCurioItemStack(player);
                 if (tiabCurioItemStack != ItemStack.EMPTY) {
-                    TimeInABottleItem item = (TimeInABottleItem) Constants.TIAB_ITEM.get();
+                    TimeInABottleItem item = (TimeInABottleItem) Constants.TIAB_ITEM;
                     int currentStoredEnergy = item.getStoredEnergy(tiabCurioItemStack);
 
                     if (!isAdd) {

@@ -12,7 +12,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static me.mangorage.curiotiab.common.Constants.MODID;
+import static me.mangorage.curiotiab.common.core.Constants.MODID;
 
 public class NetworkHandler {
     private static final String PTC_VERSION = "2";
