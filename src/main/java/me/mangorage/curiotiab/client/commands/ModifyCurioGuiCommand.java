@@ -12,7 +12,7 @@ public class ModifyCurioGuiCommand {
     public final static String SAVE = "save";
     public final static String RESET = "reset";
 
-    enum Type {
+    private enum Type {
         RESET,
         SAVE,
         MODIFY
@@ -29,7 +29,6 @@ public class ModifyCurioGuiCommand {
     public static int toggleCommand(CommandContext<CommandSourceStack> context) {
         return processCommand(context, Type.MODIFY);
     }
-
 
     private static int processCommand(CommandContext<CommandSourceStack> context, Type type) {
         switch (type) {

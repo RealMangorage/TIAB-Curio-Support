@@ -1,40 +1,38 @@
 package me.mangorage.curiotiab.common.network;
 
-import me.mangorage.curiotiab.common.network.client.CUseTiab;
+import me.mangorage.curiotiab.common.core.Constants;
+import me.mangorage.curiotiab.common.core.Util;
+import me.mangorage.curiotiab.common.network.client.UseTiabPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.event.EventNetworkChannel;
 import net.minecraftforge.network.simple.SimpleChannel;
-import java.util.Optional;
-import java.util.function.BiConsumer;
+import org.apache.maven.artifact.versioning.ArtifactVersion;
+import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
+
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static me.mangorage.curiotiab.common.core.Constants.MODID;
-
 public class NetworkHandler {
-    private static final String PTC_VERSION = "2";
-    public static SimpleChannel INSTANCE;
+    private final static ArtifactVersion NETWORK_VERSION = new DefaultArtifactVersion("1.0.0");
+    public final static SimpleChannel NETWORK_CHANNEL = NetworkRegistry.newSimpleChannel(
+            new ResourceLocation(Constants.MODID, "main"),
+            NETWORK_VERSION ::toString,
+            clientVer -> Util.checkMajor(clientVer, NETWORK_VERSION),
+            serverVer -> Util.checkMajor(serverVer, NETWORK_VERSION)
+    );
     private static int id = 0;
+    private static <MSG> void emptyPayload(MSG packet, FriendlyByteBuf buf) {}
 
     public static void register() {
-        INSTANCE = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MODID, "main"))
-                .networkProtocolVersion(() -> PTC_VERSION)
-                .clientAcceptedVersions(PTC_VERSION::equals)
-                .serverAcceptedVersions(PTC_VERSION::equals)
-                .simpleChannel();
-
-        //Client Packets
-        register(CUseTiab.class, CUseTiab::encode, CUseTiab::new, CUseTiab::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
-    }
-
-    private static <M> void register(Class<M> messageType, BiConsumer<M, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, M> decoder, BiConsumer<M, Supplier<NetworkEvent.Context>> messageConsumer, Optional<NetworkDirection> direction) {
-        INSTANCE.registerMessage(id++, messageType, encoder, decoder, messageConsumer, direction);
-    }
-
-    private static <M> void register(Class<M> messageType, BiConsumer<M, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, M> decoder, BiConsumer<M, Supplier<NetworkEvent.Context>> messageConsumer) {
-        register(messageType, encoder, decoder, messageConsumer, Optional.empty());
+        NETWORK_CHANNEL.messageBuilder(UseTiabPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                .decoder(UseTiabPacket::getInstance)
+                .encoder(NetworkHandler::emptyPayload)
+                .consumerMainThread(UseTiabPacket::handle)
+                .add();
     }
 }

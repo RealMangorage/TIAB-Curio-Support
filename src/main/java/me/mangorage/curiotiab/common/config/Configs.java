@@ -6,10 +6,9 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 
 public class Configs {
-    public static ForgeConfigSpec.Builder SERVER_BUILDER;
-    public static ForgeConfigSpec.Builder COMMON_BUILDER;
-
-    public static ForgeConfigSpec.Builder CLIENT_BUILDER;
+    public final static ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();;
+    public final static ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();;
+    public final static ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();;
     public static void register() {
         registerServerConfigs();
         registerCommonConfigs();
@@ -17,20 +16,15 @@ public class Configs {
     }
 
     private static void registerServerConfigs() {
-        SERVER_BUILDER = new ForgeConfigSpec.Builder();
-
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, SERVER_BUILDER.build());
     }
 
     private static void registerCommonConfigs() {
-        COMMON_BUILDER = new ForgeConfigSpec.Builder();
-
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, COMMON_BUILDER.build());
     }
 
     private static void registerClientConfigs() {
-        CLIENT_BUILDER = new ForgeConfigSpec.Builder();
-        CurioTiabClientConfig.registerClientConfig(CLIENT_BUILDER);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_BUILDER.build());
+        CurioTiabClientConfig.registerClientConfig(CLIENT_BUILDER);
     }
 }

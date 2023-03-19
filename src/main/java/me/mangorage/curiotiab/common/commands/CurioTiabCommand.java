@@ -15,7 +15,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 
 public class CurioTiabCommand {
     public static LiteralArgumentBuilder<CommandSourceStack> addTimeCommand = (LiteralArgumentBuilder)((LiteralArgumentBuilder) Commands.literal("addTime").requires((commandSource) -> {

@@ -2,7 +2,7 @@ package me.mangorage.curiotiab.client;
 
 import me.mangorage.curiotiab.client.commands.ModifyCurioGuiCommand;
 import me.mangorage.curiotiab.common.network.NetworkHandler;
-import me.mangorage.curiotiab.common.network.client.CUseTiab;
+import me.mangorage.curiotiab.common.network.client.UseTiabPacket;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
@@ -50,7 +50,7 @@ public class ClientRegistry {
 
             Minecraft mc = Minecraft.getInstance();
             if (ClientRegistry.useTiab.consumeClick() && mc.level != null)
-                NetworkHandler.INSTANCE.send(PacketDistributor.SERVER.noArg(), new CUseTiab());
+                NetworkHandler.NETWORK_CHANNEL.send(PacketDistributor.SERVER.noArg(), UseTiabPacket.getInstance());
 
             if (ClientRegistry.hideGUI.consumeClick())
                 CurioTiabHudOverlay.getInstance().toggleOverlay();
