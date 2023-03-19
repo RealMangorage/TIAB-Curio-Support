@@ -1,0 +1,10 @@
+{
+  "curios.identifier.tiab": "TIAB",
+  "key.categories.curiotiab": "Time In A Bottle Curio Support",
+  "key.curiotiab.hide": "Toggle gui overlay element",
+  "key.curiotiab.use": "Use time in a bottle",
+  "msg.curiotiabgui.modify.disable": "Modify CurioTiab GUI Disabled",
+  "msg.curiotiabgui.modify.enable": "Modify CurioTiab GUI Enabled",
+  "msg.curiotiabgui.reset": "Modify CurioTiab GUI Position Reset",
+  "msg.curiotiabgui.saved": "Modify CurioTiab GUI Position Saved"
+}
