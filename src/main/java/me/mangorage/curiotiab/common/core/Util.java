@@ -31,9 +31,7 @@ public class Util {
         try {
             final var v = new DefaultArtifactVersion(version);
             return v.getMajorVersion() >= art.getMajorVersion();
-        }
-
-        catch(Exception e) {
+        } catch(Exception e) {
             return false;
         }
     }
