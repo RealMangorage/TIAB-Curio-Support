@@ -24,7 +24,8 @@ public class Configs {
     }
 
     private static void registerClientConfigs() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_BUILDER.build());
         CurioTiabClientConfig.registerClientConfig(CLIENT_BUILDER);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_BUILDER.build());
     }
 }
