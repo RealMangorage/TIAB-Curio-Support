@@ -86,5 +86,6 @@ public class ConfigurationScreen extends Screen {
         CurioTiabHudOverlay.getInstance().setPosition(5, 5);
         this.x = 5;
         this.y = 5;
+
     }
 }
