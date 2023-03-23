@@ -8,20 +8,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 
 import java.awt.event.MouseEvent;
-import java.util.function.Supplier;
 
 public class ConfigurationScreen extends Screen {
-    private final static Supplier<ConfigurationScreen> SUPPLIER_INSTANCE = () -> new ConfigurationScreen();
-    public final static ConfigurationScreen getInstance() {
-        return SUPPLIER_INSTANCE.get();
-    }
-
     private boolean hiddenMode = false;
     private boolean leftClickedRecently = false;
     private int ticks = 0;
     private int x, y = 5;
 
-    private ConfigurationScreen() {
+    public static void open() {
+        Minecraft.getInstance().setScreen(new ConfigurationScreen());
+    }
+
+    public ConfigurationScreen() {
         super(Translatable.SCREEN_CONFIG.get());
     }
 
@@ -69,22 +67,10 @@ public class ConfigurationScreen extends Screen {
         }
     }
 
-
-
     @Override
     public void onClose() {
         CurioTiabHudOverlay.setHidden(hiddenMode);
         Minecraft.getInstance().setScreen(null);
-    }
-    public void open() {
-        hiddenMode = CurioTiabHudOverlay.isHidden();
-        if (!hiddenMode)
-            CurioTiabHudOverlay.getInstance().toggleOverlay(); // Turn it off!
-
-        Minecraft.getInstance().setScreen(ConfigurationScreen.getInstance());
-
-        this.x = 5;
-        this.y = 5;
     }
 
     @Override

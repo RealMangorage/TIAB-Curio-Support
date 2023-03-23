@@ -30,10 +30,11 @@ public class NetworkHandler {
                 .encoder(NetworkHandler::emptyPayload)
                 .consumerMainThread(UseTiabPacket::handle)
                 .add();
+
         NETWORK_CHANNEL.messageBuilder(OpenConfigScreen.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(OpenConfigScreen::getInstance)
                 .encoder(NetworkHandler::emptyPayload)
-                .consumerNetworkThread(OpenConfigScreen::handle)
+                .consumerMainThread(OpenConfigScreen::handle)
                 .add();
     }
 }
