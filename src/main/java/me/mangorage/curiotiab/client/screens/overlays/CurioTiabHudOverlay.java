@@ -1,5 +1,6 @@
 package me.mangorage.curiotiab.client.screens.overlays;
 
+import com.haoict.tiab.items.TimeInABottleItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import me.mangorage.curiotiab.client.config.CurioTiabClientConfig;
 import me.mangorage.curiotiab.common.core.Util;
@@ -67,7 +68,6 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
         }
 
         AtomicInteger yOffset = new AtomicInteger(0);
-
         Player player = Minecraft.getInstance().player;
         Font font = Minecraft.getInstance().font;
 
@@ -83,10 +83,8 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
                 }));
 
 
-                Lines.forEach((component) -> {
-                    GuiComponent.drawString(poseStack, font, component, this.x, this.y + yOffset.get(), 128);
-                    yOffset.set(yOffset.get() + 10);
-                });
+                Lines.forEach((component) ->
+                        GuiComponent.drawString(poseStack, font, component, this.x, this.y + yOffset.getAndAdd(10), 128));
             }
         }
     }

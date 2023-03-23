@@ -1,17 +1,13 @@
 package me.mangorage.curiotiab.client;
 
-import me.mangorage.curiotiab.client.commands.ModifyCurioGuiCommand;
 import me.mangorage.curiotiab.client.screens.overlays.CurioTiabHudOverlay;
 import me.mangorage.curiotiab.common.network.NetworkHandler;
 import me.mangorage.curiotiab.common.network.client.UseTiabPacket;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.commands.Commands;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -48,18 +44,13 @@ public class ClientRegistry {
                 return;
 
             Minecraft mc = Minecraft.getInstance();
-            if (ClientRegistry.useTiab.consumeClick() && mc.level != null)
-                NetworkHandler.NETWORK_CHANNEL.send(PacketDistributor.SERVER.noArg(), UseTiabPacket.getInstance());
+            if (mc.level != null) {
+                if (ClientRegistry.useTiab.consumeClick())
+                    NetworkHandler.NETWORK_CHANNEL.send(PacketDistributor.SERVER.noArg(), UseTiabPacket.getInstance());
 
-            if (ClientRegistry.hideGUI.consumeClick())
-                CurioTiabHudOverlay.getInstance().toggleOverlay();
-        }
-
-        @SubscribeEvent
-        public static void commandRegister(final RegisterCommandsEvent event) {
-            event.getDispatcher().register(
-                    Commands.literal("modifyCurioTiabGui").executes(ModifyCurioGuiCommand::processCommand)
-            );
+                if (ClientRegistry.hideGUI.consumeClick())
+                    CurioTiabHudOverlay.getInstance().toggleOverlay();
+            }
         }
     }
 }

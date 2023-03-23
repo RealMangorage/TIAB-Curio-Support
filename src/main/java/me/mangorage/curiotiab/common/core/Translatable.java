@@ -5,10 +5,8 @@ import net.minecraft.network.chat.MutableComponent;
 
 public class Translatable {
     public final static Translatable
-        MSG_ENABLED = new Translatable("msg.curiotiabgui.modify.enable"),
-        MSG_DISABLED = new Translatable("msg.curiotiabgui.modify.disable"),
-        MSG_RESET = new Translatable("msg.curiotiabgui.reset"),
-        MSG_SAVED = new Translatable("msg.curiotiabgui.saved"),
+        MSG_RESET = new Translatable("msg.screen.config.curiotiab.reset"),
+        MSG_SAVED = new Translatable("msg.screen.config.curiotiab.saved"),
         CATEGORY_KEY = new Translatable( "key.categories.curiotiab"),
         USE_KEY = new Translatable("key.curiotiab.use"),
         TOGGLE_KEY = new Translatable("key.curiotiab.hide"),
