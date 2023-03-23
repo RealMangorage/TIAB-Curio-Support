@@ -5,9 +5,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import me.mangorage.curiotiab.client.config.CurioTiabClientConfig;
 import me.mangorage.curiotiab.common.core.Util;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.HotbarManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +24,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CurioTiabHudOverlay implements IGuiOverlay {
+
+
     private final static CurioTiabHudOverlay INSTANCE = new CurioTiabHudOverlay();
 
     public final static CurioTiabHudOverlay getInstance() {
@@ -39,7 +44,9 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
     private int x, y = 5;
     private boolean check = true;
 
-    private CurioTiabHudOverlay() {}
+    private CurioTiabHudOverlay() {
+
+    }
 
     public void setPosition(int x, int y) {
         this.x = x;
@@ -88,4 +95,6 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
             }
         }
     }
+
+
 }

@@ -14,7 +14,9 @@ public class OpenConfigScreen {
 
     public static void handle(OpenConfigScreen msg, Supplier<NetworkEvent.Context> ctx) {
         if (ctx.get().getDirection().getReceptionSide() == LogicalSide.CLIENT)
-            ConfigurationScreen.open();
+            ConfigurationScreen.openConsumer((screen) -> {
+                screen.open();
+            }); // This is so anyone can call this and handle how they wanna open it!
 
         ctx.get().setPacketHandled(true);
     }

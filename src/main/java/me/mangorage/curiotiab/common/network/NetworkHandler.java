@@ -13,7 +13,7 @@ import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 
 public class NetworkHandler {
-    private final static ArtifactVersion NETWORK_VERSION = new DefaultArtifactVersion("1.0.0");
+    private final static ArtifactVersion NETWORK_VERSION = new DefaultArtifactVersion("1.0.1");
     public final static SimpleChannel NETWORK_CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(Constants.MODID, "main"),
             NETWORK_VERSION ::toString,

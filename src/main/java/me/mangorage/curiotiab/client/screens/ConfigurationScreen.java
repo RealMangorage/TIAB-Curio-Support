@@ -1,35 +1,39 @@
 package me.mangorage.curiotiab.client.screens;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
+import me.mangorage.curiotiab.client.ClientUtils;
 import me.mangorage.curiotiab.client.screens.overlays.CurioTiabHudOverlay;
 import me.mangorage.curiotiab.common.core.Translatable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraftforge.client.gui.ScreenUtils;
+import org.apache.commons.lang3.mutable.MutableInt;
 
-import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class ConfigurationScreen extends Screen {
+    private static ConfigurationScreen INSTANCE = new ConfigurationScreen();
+    private List<Component> components = new ArrayList<>();
+    private int maxWidth = 0;
     private boolean hiddenMode = false;
-    private boolean leftClickedRecently = false;
-    private int ticks = 0;
     private int x, y = 5;
 
-    public static void open() {
-        Minecraft.getInstance().setScreen(new ConfigurationScreen());
+
+    public static void openConsumer(Consumer<ConfigurationScreen> consumer) {
+        consumer.accept(INSTANCE);
     }
 
-    public ConfigurationScreen() {
+    private ConfigurationScreen() {
         super(Translatable.SCREEN_CONFIG.get());
     }
 
-    @Override
-    public void tick() {
-        ticks++;
-        if (ticks % 5 == 0)
-            leftClickedRecently = false;
-
-        super.tick();
+    public void open() {
+        Minecraft.getInstance().setScreen(this);
     }
 
     @Override
@@ -39,45 +43,66 @@ public class ConfigurationScreen extends Screen {
 
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
-        if (pButton == MouseEvent.NOBUTTON)
-            leftClickedRecently = true;
+        int cX = (int) (pMouseX < 0 ? 0 : pMouseX);
+        int cY = (int) (pMouseY < 0 ? 0 : pMouseY);
 
-        this.x = (int) pMouseX;
-        this.y = (int) pMouseY;
+        this.x = ClientUtils.getClampedWidth(cX, minecraft.screen.width, maxWidth);
+        this.y = ClientUtils.getClampedHeight(cY, minecraft.screen.height, font.lineHeight * components.size());
         return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
     }
 
     @Override
-    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-        if (pButton == MouseEvent.BUTTON1)
-            reset();
-        if (pButton == MouseEvent.NOBUTTON && leftClickedRecently)
-            save();
-        return super.mouseClicked(pMouseX, pMouseY, pButton);
+    public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
+        if (hasShiftDown()) {
+            if (pKeyCode == InputConstants.KEY_R)
+                reset();
+            if (pKeyCode == InputConstants.KEY_S)
+                save();
+        }
+        return super.keyPressed(pKeyCode, pScanCode, pModifiers);
     }
 
     @Override
     public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        int id = 1;
-        if (minecraft != null && minecraft.player != null) {
-            font.draw(pPoseStack, Translatable.SCREEN_DRAG.get().withStyle(ChatFormatting.GOLD), x, y, 128);
-            font.draw(pPoseStack, Translatable.SCREEN_CLOSE.get().withStyle(ChatFormatting.GOLD), x, y + (10 * id++), 128);
-            font.draw(pPoseStack, Translatable.SCREEN_SAVE.get().withStyle(ChatFormatting.GOLD), x, y + (10 * id++), 128);
-            font.draw(pPoseStack, Translatable.SCREEN_RESET.get().withStyle(ChatFormatting.GOLD), x, y + (10 * id), 128);
-        }
+        if (!minecraft.isRunning())
+            return;
+
+
+        int cX = ClientUtils.getClampedWidth(x, minecraft.screen.width, maxWidth);
+        int cY = ClientUtils.getClampedHeight(y, minecraft.screen.height, font.lineHeight * components.size());
+        renderBackground(pPoseStack);
+
+        MutableInt finalID = new MutableInt(0);
+        components.forEach(component ->
+                drawString(pPoseStack, font, component, cX, cY + (font.lineHeight * (finalID.getAndAdd(1))), 128)
+        );
     }
 
     @Override
     public void onClose() {
         CurioTiabHudOverlay.setHidden(hiddenMode);
-        Minecraft.getInstance().setScreen(null);
+        Minecraft.getInstance().player.sendSystemMessage(Component.translatable(Translatable.SCREEN_CLOSED.getKey()).withStyle(ChatFormatting.GREEN));
+        super.onClose();
     }
+
+    public void updateComponents() {
+        components.clear();
+        components.add(Translatable.SCREEN_DRAG.get().withStyle(ChatFormatting.GOLD));
+        components.add(Translatable.SCREEN_CLOSE.get().withStyle(ChatFormatting.GOLD));
+        components.add(Translatable.SCREEN_SAVE.get().withStyle(ChatFormatting.GOLD));
+        components.add(Translatable.SCREEN_RESET.get().withStyle(ChatFormatting.GOLD));
+        this.maxWidth = ClientUtils.getMaxStringsWidth(components, font);
+    }
+
+
 
     @Override
     protected void init() {
         hiddenMode = CurioTiabHudOverlay.isHidden();
         if (!hiddenMode)
             CurioTiabHudOverlay.getInstance().toggleOverlay(); // Turn it off!
+
+        updateComponents();
 
         this.x = 5;
         this.y = 5;

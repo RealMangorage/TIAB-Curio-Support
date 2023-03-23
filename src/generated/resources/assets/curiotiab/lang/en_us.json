@@ -9,6 +9,6 @@
   "screen.curiotiab.config.close": "Press ESC to exit config screen",
   "screen.curiotiab.config.closed": "Closed Curio TIAB config Screen",
   "screen.curiotiab.config.drag": "Click and drag to move this around",
-  "screen.curiotiab.config.reset": "Right Click to reset overlay settings",
-  "screen.curiotiab.config.save": "Left Click to save overlay settings"
+  "screen.curiotiab.config.reset": "Shift + R to reset overlay settings",
+  "screen.curiotiab.config.save": "Shift + S to save overlay settings"
 }
