@@ -1,6 +1,5 @@
 package me.mangorage.curiotiab.client;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 import org.apache.commons.lang3.mutable.MutableInt;

@@ -16,7 +16,8 @@ public class Translatable {
         SCREEN_CLOSE = new Translatable("screen.curiotiab.config.close"),
         SCREEN_SAVE = new Translatable("screen.curiotiab.config.save"),
         SCREEN_RESET = new Translatable("screen.curiotiab.config.reset"),
-        SCREEN_CLOSED = new Translatable("screen.curiotiab.config.closed");
+        SCREEN_CLOSED = new Translatable("screen.curiotiab.config.closed"),
+        CMD_REFRESH_DATA = new Translatable("msg.curiotiab.refreshcmd");
 
     private final String key;
 

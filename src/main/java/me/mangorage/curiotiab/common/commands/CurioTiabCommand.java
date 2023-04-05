@@ -2,26 +2,27 @@ package me.mangorage.curiotiab.common.commands;
 
 import com.haoict.tiab.config.TiabConfig;
 import com.haoict.tiab.items.TimeInABottleItem;
-import com.haoict.tiab.utils.SendMessage;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import me.mangorage.curiotiab.common.core.Constants;
-import me.mangorage.curiotiab.common.core.Util;
-import me.mangorage.curiotiab.common.network.NetworkHandler;
-import me.mangorage.curiotiab.common.network.server.OpenConfigScreen;
+import me.mangorage.curiotiab.common.core.*;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+import static me.mangorage.curiotiab.common.core.Constants.MODID;
+
+@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CurioTiabCommand {
     protected static boolean requires(CommandSourceStack stack) {
         return stack.hasPermission(2);
     }
 
+    @SubscribeEvent
     public static void register(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("curiotiab")
                 .then(Commands.literal("addTime")
@@ -32,13 +33,7 @@ public class CurioTiabCommand {
                         .requires(CurioTiabCommand::requires)
                         .then(Commands.argument("seconds", IntegerArgumentType.integer())
                                 .executes((stack) -> {return processTimeCommand(stack, false);})))
-                .then(Commands.literal("configureOverlay")
-                        .executes((stack) -> {
-                            ServerPlayer player = stack.getSource().getPlayer();
-                            if (player != null)
-                                NetworkHandler.NETWORK_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), OpenConfigScreen.getInstance());
-                            return 1;
-                        })));
+            );
     }
 
     private static int processTimeCommand(CommandContext<CommandSourceStack> ctx, boolean isAdd) throws CommandSyntaxException {
@@ -55,8 +50,7 @@ public class CurioTiabCommand {
         }
 
         ItemStack tiabCurioItemStack = Util.getTiabCurioItemStack(player);
-        if (tiabCurioItemStack != ItemStack.EMPTY) {
-            TimeInABottleItem item = (TimeInABottleItem) Constants.TIAB_ITEM;
+        if (tiabCurioItemStack != ItemStack.EMPTY && tiabCurioItemStack.getItem() instanceof TimeInABottleItem item) {
             int currentStoredEnergy = item.getStoredEnergy(tiabCurioItemStack);
 
             if (!isAdd) {
@@ -68,9 +62,9 @@ public class CurioTiabCommand {
             }
 
             item.setStoredEnergy(tiabCurioItemStack, currentStoredEnergy + timeToAdd * 20);
-            SendMessage.sendStatusMessage(player, String.format("%s %d seconds", isAdd ? "Added" : "Removed ", timeToAdd));
+            Util.sendStatusMessage(player, String.format("%s %d seconds", isAdd ? "Added" : "Removed ", timeToAdd));
         } else {
-            SendMessage.sendStatusMessage(player, "No Time in a bottle item in curio slot");
+            Util.sendStatusMessage(player, "No Time in a bottle item in curio slot");
         }
 
         return 1;

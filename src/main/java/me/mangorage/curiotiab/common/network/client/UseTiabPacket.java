@@ -1,18 +1,15 @@
 package me.mangorage.curiotiab.common.network.client;
 
-import me.mangorage.curiotiab.common.core.Constants;
 import me.mangorage.curiotiab.common.core.Util;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 

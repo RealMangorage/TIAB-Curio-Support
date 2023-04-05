@@ -3,7 +3,6 @@ package me.mangorage.curiotab.datagen.providers.language;
 import me.mangorage.curiotiab.common.core.Translatable;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
-import org.checkerframework.checker.units.qual.A;
 
 import static me.mangorage.curiotiab.common.core.Constants.MODID;
 import static me.mangorage.curiotiab.common.core.Translatable.*;

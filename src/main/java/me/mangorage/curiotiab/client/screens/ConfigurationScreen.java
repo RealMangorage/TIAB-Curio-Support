@@ -9,15 +9,12 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.client.gui.ScreenUtils;
 import org.apache.commons.lang3.mutable.MutableInt;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
 public class ConfigurationScreen extends Screen {
-    private static ConfigurationScreen INSTANCE = new ConfigurationScreen();
     private List<Component> components = new ArrayList<>();
     private int maxWidth = 0;
     private boolean hiddenMode = false;
@@ -25,15 +22,11 @@ public class ConfigurationScreen extends Screen {
 
 
     public static void openConsumer(Consumer<ConfigurationScreen> consumer) {
-        consumer.accept(INSTANCE);
+        consumer.accept(new ConfigurationScreen());
     }
 
     private ConfigurationScreen() {
         super(Translatable.SCREEN_CONFIG.get());
-    }
-
-    public void open() {
-        Minecraft.getInstance().setScreen(this);
     }
 
     @Override
@@ -93,8 +86,6 @@ public class ConfigurationScreen extends Screen {
         components.add(Translatable.SCREEN_RESET.get().withStyle(ChatFormatting.GOLD));
         this.maxWidth = ClientUtils.getMaxStringsWidth(components, font);
     }
-
-
 
     @Override
     protected void init() {

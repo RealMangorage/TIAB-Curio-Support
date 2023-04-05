@@ -6,9 +6,10 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 
 public class Configs {
-    public final static ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();;
-    public final static ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();;
-    public final static ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();;
+    public final static ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
+    public final static ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+    public final static ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
+
     public static void register() {
         registerServerConfigs();
         registerCommonConfigs();

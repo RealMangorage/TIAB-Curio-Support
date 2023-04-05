@@ -1,16 +1,12 @@
 package me.mangorage.curiotiab.client.screens.overlays;
 
-import com.haoict.tiab.items.TimeInABottleItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import me.mangorage.curiotiab.client.config.CurioTiabClientConfig;
 import me.mangorage.curiotiab.common.core.Util;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.HotbarManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiComponent;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -82,7 +78,8 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
             ItemStack TIAB = Util.getTiabCurioItemStack(player);
             if (TIAB != ItemStack.EMPTY) {
                 List<Component> Lines = new ArrayList<>();
-                Lines.add(0, Component.literal("Time in a Bottle Curio").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GOLD));
+                if (CurioTiabClientConfig.USE_HEADER.get())
+                    Lines.add(0, Component.literal("Time in a Bottle Curio").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GOLD));
 
                 TIAB.getTooltipLines(player, TooltipFlag.Default.NORMAL).forEach((component -> {
                     if (component.getString().contains("Stored time") || component.getString().contains("Total accumulated time"))
