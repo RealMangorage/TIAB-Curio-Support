@@ -29,6 +29,7 @@ public class en_us extends LanguageProvider {
         add(SCREEN_CLOSED, "Closed Curio TIAB config Screen");
         add(SCREEN_RESET, "Shift + R to reset overlay settings");
         add(SCREEN_SAVE, "Shift + S to save overlay settings");
+        add(COMMAND_RELOAD_CLIENT, "Reload Client Configs");
     }
 
     private void add(Translatable translatable, String value) {

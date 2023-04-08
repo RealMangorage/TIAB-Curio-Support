@@ -20,8 +20,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CurioTiabHudOverlay implements IGuiOverlay {
-
-
     private final static CurioTiabHudOverlay INSTANCE = new CurioTiabHudOverlay();
 
     public final static CurioTiabHudOverlay getInstance() {
@@ -53,6 +51,9 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
 
         CurioTiabClientConfig.POSX.save();
         CurioTiabClientConfig.POSY.save();
+
+        CurioTiabClientConfig.invalidateCache(CurioTiabClientConfig.Type.POSX);
+        CurioTiabClientConfig.invalidateCache(CurioTiabClientConfig.Type.POSY);
     }
 
     public void toggleOverlay() {
@@ -65,8 +66,8 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
             return;
 
         if (check) {
-            this.x = CurioTiabClientConfig.POSX.get();
-            this.y = CurioTiabClientConfig.POSY.get();
+            this.x = CurioTiabClientConfig.getPosX();
+            this.y = CurioTiabClientConfig.getPosY();
             check = !check;
         }
 
@@ -78,7 +79,7 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
             ItemStack TIAB = Util.getTiabCurioItemStack(player);
             if (TIAB != ItemStack.EMPTY) {
                 List<Component> Lines = new ArrayList<>();
-                if (CurioTiabClientConfig.USE_HEADER.get())
+                if (CurioTiabClientConfig.useHeader())
                     Lines.add(0, Component.literal("Time in a Bottle Curio").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GOLD));
 
                 TIAB.getTooltipLines(player, TooltipFlag.Default.NORMAL).forEach((component -> {

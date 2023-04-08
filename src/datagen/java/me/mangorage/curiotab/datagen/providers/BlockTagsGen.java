@@ -1,5 +1,6 @@
 package me.mangorage.curiotab.datagen.providers;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -14,7 +15,6 @@ public class BlockTagsGen extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
-
     }
 
     @Override

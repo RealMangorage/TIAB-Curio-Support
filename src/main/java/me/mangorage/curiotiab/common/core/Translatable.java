@@ -1,7 +1,9 @@
 package me.mangorage.curiotiab.common.core;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.player.Player;
 
 public class Translatable {
     public final static Translatable
@@ -17,7 +19,7 @@ public class Translatable {
         SCREEN_SAVE = new Translatable("screen.curiotiab.config.save"),
         SCREEN_RESET = new Translatable("screen.curiotiab.config.reset"),
         SCREEN_CLOSED = new Translatable("screen.curiotiab.config.closed"),
-        CMD_REFRESH_DATA = new Translatable("msg.curiotiab.refreshcmd");
+        COMMAND_RELOAD_CLIENT = new Translatable("msg.curiotiab.command.reload");
 
     private final String key;
 
@@ -31,6 +33,19 @@ public class Translatable {
 
     public String getKey() {
         return key;
+    }
+
+
+    public void sendSystemMessage(Player player, String... args) {
+        player.sendSystemMessage(get(args));
+    }
+
+    public void sendSystemMessage(Player player, ChatFormatting[] formatting, String... args) {
+        player.sendSystemMessage(get(args).withStyle(formatting));
+    }
+
+    public void sendSystemMessage(Player player, ChatFormatting formatting, String... args) {
+        sendSystemMessage(player, new ChatFormatting[]{formatting}, args);
     }
 
 }

@@ -2,9 +2,9 @@ package me.mangorage.curiotiab.client.screens;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
-import me.mangorage.curiotiab.client.ClientUtils;
 import me.mangorage.curiotiab.client.screens.overlays.CurioTiabHudOverlay;
 import me.mangorage.curiotiab.common.core.Translatable;
+import me.mangorage.curiotiab.common.core.Util;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -12,7 +12,6 @@ import net.minecraft.network.chat.Component;
 import org.apache.commons.lang3.mutable.MutableInt;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class ConfigurationScreen extends Screen {
     private List<Component> components = new ArrayList<>();
@@ -21,8 +20,8 @@ public class ConfigurationScreen extends Screen {
     private int x, y = 5;
 
 
-    public static void openConsumer(Consumer<ConfigurationScreen> consumer) {
-        consumer.accept(new ConfigurationScreen());
+    public static void open() {
+        Minecraft.getInstance().setScreen(new ConfigurationScreen());
     }
 
     private ConfigurationScreen() {
@@ -39,8 +38,8 @@ public class ConfigurationScreen extends Screen {
         int cX = (int) (pMouseX < 0 ? 0 : pMouseX);
         int cY = (int) (pMouseY < 0 ? 0 : pMouseY);
 
-        this.x = ClientUtils.getClampedWidth(cX, minecraft.screen.width, maxWidth);
-        this.y = ClientUtils.getClampedHeight(cY, minecraft.screen.height, font.lineHeight * components.size());
+        this.x = Util.getClampedWidth(cX, minecraft.screen.width, maxWidth);
+        this.y = Util.getClampedHeight(cY, minecraft.screen.height, font.lineHeight * components.size());
         return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
     }
 
@@ -61,8 +60,8 @@ public class ConfigurationScreen extends Screen {
             return;
 
 
-        int cX = ClientUtils.getClampedWidth(x, minecraft.screen.width, maxWidth);
-        int cY = ClientUtils.getClampedHeight(y, minecraft.screen.height, font.lineHeight * components.size());
+        int cX = Util.getClampedWidth(x, minecraft.screen.width, maxWidth);
+        int cY = Util.getClampedHeight(y, minecraft.screen.height, font.lineHeight * components.size());
         renderBackground(pPoseStack);
 
         MutableInt finalID = new MutableInt(0);
@@ -74,7 +73,7 @@ public class ConfigurationScreen extends Screen {
     @Override
     public void onClose() {
         CurioTiabHudOverlay.setHidden(hiddenMode);
-        Minecraft.getInstance().player.sendSystemMessage(Component.translatable(Translatable.SCREEN_CLOSED.getKey()).withStyle(ChatFormatting.GREEN));
+        Translatable.SCREEN_CLOSED.sendSystemMessage(minecraft.player, ChatFormatting.GREEN);
         super.onClose();
     }
 
@@ -84,7 +83,7 @@ public class ConfigurationScreen extends Screen {
         components.add(Translatable.SCREEN_CLOSE.get().withStyle(ChatFormatting.GOLD));
         components.add(Translatable.SCREEN_SAVE.get().withStyle(ChatFormatting.GOLD));
         components.add(Translatable.SCREEN_RESET.get().withStyle(ChatFormatting.GOLD));
-        this.maxWidth = ClientUtils.getMaxStringsWidth(components, font);
+        this.maxWidth = Util.getMaxStringsWidth(components, font);
     }
 
     @Override
@@ -94,18 +93,18 @@ public class ConfigurationScreen extends Screen {
             CurioTiabHudOverlay.getInstance().toggleOverlay(); // Turn it off!
 
         updateComponents();
-
         this.x = 5;
         this.y = 5;
     }
 
     private void save() {
-        minecraft.player.sendSystemMessage(Translatable.MSG_SAVED.get().withStyle(ChatFormatting.GREEN));
+        Translatable.MSG_SAVED.sendSystemMessage(minecraft.player, ChatFormatting.GREEN);
         CurioTiabHudOverlay.getInstance().setPosition(x, y);
+
     }
 
     private void reset() {
-        minecraft.player.sendSystemMessage(Translatable.MSG_RESET.get().withStyle(ChatFormatting.GREEN));
+        Translatable.MSG_RESET.sendSystemMessage(minecraft.player, ChatFormatting.GREEN);
         CurioTiabHudOverlay.getInstance().setPosition(5, 5);
         this.x = 5;
         this.y = 5;
