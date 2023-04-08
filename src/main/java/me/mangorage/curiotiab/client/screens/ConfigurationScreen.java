@@ -7,11 +7,14 @@ import me.mangorage.curiotiab.common.core.Translatable;
 import me.mangorage.curiotiab.common.core.Util;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.apache.commons.lang3.mutable.MutableInt;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Math.min;
 
 public class ConfigurationScreen extends Screen {
     private List<Component> components = new ArrayList<>();
@@ -20,8 +23,11 @@ public class ConfigurationScreen extends Screen {
     private int x, y = 5;
 
 
-    public static void open() {
-        Minecraft.getInstance().setScreen(new ConfigurationScreen());
+    public static void open(boolean tell) {
+        if (tell)
+            Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new ConfigurationScreen()));
+        else
+            Minecraft.getInstance().setScreen(new ConfigurationScreen());
     }
 
     private ConfigurationScreen() {
@@ -38,8 +44,8 @@ public class ConfigurationScreen extends Screen {
         int cX = (int) (pMouseX < 0 ? 0 : pMouseX);
         int cY = (int) (pMouseY < 0 ? 0 : pMouseY);
 
-        this.x = Util.getClampedWidth(cX, minecraft.screen.width, maxWidth);
-        this.y = Util.getClampedHeight(cY, minecraft.screen.height, font.lineHeight * components.size());
+        this.x = getClampedWidth(cX, minecraft.screen.width, maxWidth);
+        this.y = getClampedHeight(cY, minecraft.screen.height, font.lineHeight * components.size());
         return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
     }
 
@@ -60,8 +66,8 @@ public class ConfigurationScreen extends Screen {
             return;
 
 
-        int cX = Util.getClampedWidth(x, minecraft.screen.width, maxWidth);
-        int cY = Util.getClampedHeight(y, minecraft.screen.height, font.lineHeight * components.size());
+        int cX = getClampedWidth(x, minecraft.screen.width, maxWidth);
+        int cY = getClampedHeight(y, minecraft.screen.height, font.lineHeight * components.size());
         renderBackground(pPoseStack);
 
         MutableInt finalID = new MutableInt(0);
@@ -83,7 +89,7 @@ public class ConfigurationScreen extends Screen {
         components.add(Translatable.SCREEN_CLOSE.get().withStyle(ChatFormatting.GOLD));
         components.add(Translatable.SCREEN_SAVE.get().withStyle(ChatFormatting.GOLD));
         components.add(Translatable.SCREEN_RESET.get().withStyle(ChatFormatting.GOLD));
-        this.maxWidth = Util.getMaxStringsWidth(components, font);
+        this.maxWidth = getMaxStringsWidth(components, font);
     }
 
     @Override
@@ -108,5 +114,23 @@ public class ConfigurationScreen extends Screen {
         CurioTiabHudOverlay.getInstance().setPosition(5, 5);
         this.x = 5;
         this.y = 5;
+    }
+
+    public static int getClampedWidth(int x, int screenwidth, int width) {
+        return min(x, screenwidth - width);
+    }
+
+    public static int getClampedHeight(int y, int screenheight, int height) {
+        return getClampedWidth(y, screenheight, height);
+    }
+
+    public static int getMaxStringsWidth(List<Component> strings, Font font) {
+        MutableInt value = new MutableInt(0);
+        strings.forEach(s -> {
+            int c = font.width(s);
+            if (c > value.getValue())
+                value.setValue(c);
+        });
+        return value.getValue();
     }
 }

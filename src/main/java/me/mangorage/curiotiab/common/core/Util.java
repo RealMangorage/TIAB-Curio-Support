@@ -1,19 +1,16 @@
 package me.mangorage.curiotiab.common.core;
 
 import com.haoict.tiab.items.AbstractTiabItem;
-import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
-import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import java.util.*;
 
-import static java.lang.Math.min;
 import static me.mangorage.curiotiab.common.core.Constants.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID)
@@ -47,23 +44,4 @@ public class Util {
     public static void sendStatusMessage(Player Player, String message) {
         Player.displayClientMessage(Component.literal(message), true);
     }
-
-    public static int getClampedWidth(int x, int screenwidth, int width) {
-        return min(x, screenwidth - width);
-    }
-
-    public static int getClampedHeight(int y, int screenheight, int height) {
-        return getClampedWidth(y, screenheight, height);
-    }
-
-    public static int getMaxStringsWidth(List<Component> strings, Font font) {
-        MutableInt value = new MutableInt(0);
-        strings.forEach(s -> {
-            int c = font.width(s);
-            if (c > value.getValue())
-                value.setValue(c);
-        });
-        return value.getValue();
-    }
-
 }

@@ -3,6 +3,7 @@
   "key.categories.curiotiab": "Time in a bottle Curio support",
   "key.curiotiab.hide": "Toggle TIAB overlay",
   "key.curiotiab.use": "Use TIAB",
+  "msg.curiotiab.command.reload": "Reload Client Configs",
   "msg.screen.config.curiotiab.reset": "Curio TIAB overlay position reset",
   "msg.screen.config.curiotiab.saved": "Curio TIAB overlay position saved",
   "screen.curiotiab.config": "Curio TIAB config screen",

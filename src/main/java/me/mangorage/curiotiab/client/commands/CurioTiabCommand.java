@@ -12,8 +12,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import static me.mangorage.curiotiab.common.core.Constants.MODID;
+import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
 
-@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = MODID, bus = FORGE, value = Dist.CLIENT)
 public class CurioTiabCommand {
 
     @SubscribeEvent
@@ -21,7 +22,7 @@ public class CurioTiabCommand {
         event.getDispatcher().register(Commands.literal("curiotiab")
                 .then(Commands.literal("configureOverlay")
                         .executes((stack) -> {
-                            Minecraft.getInstance().tell(() -> ConfigurationScreen.open());
+                            ConfigurationScreen.open(true);
                             return 1;
                         }))
                 .then(Commands.literal("reloadconfig")
