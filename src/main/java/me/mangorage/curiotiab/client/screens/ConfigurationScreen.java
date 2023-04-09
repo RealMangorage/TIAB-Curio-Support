@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
 import me.mangorage.curiotiab.client.screens.overlays.CurioTiabHudOverlay;
 import me.mangorage.curiotiab.common.core.Translatable;
-import me.mangorage.curiotiab.common.core.Util;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -21,7 +20,6 @@ public class ConfigurationScreen extends Screen {
     private int maxWidth = 0;
     private boolean hiddenMode = false;
     private int x, y = 5;
-
 
     public static void open(boolean tell) {
         if (tell)

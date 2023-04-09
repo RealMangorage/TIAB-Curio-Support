@@ -4,12 +4,16 @@ import com.haoict.tiab.items.AbstractTiabItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static me.mangorage.curiotiab.common.core.Constants.MODID;
 

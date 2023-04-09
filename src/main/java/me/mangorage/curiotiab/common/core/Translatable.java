@@ -1,6 +1,7 @@
 package me.mangorage.curiotiab.common.core;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
@@ -27,7 +28,7 @@ public class Translatable {
         this.key = key;
     }
 
-    public MutableComponent get(String... args) {
+    public MutableComponent get(Object... args) {
         return Component.translatable(key, args);
     }
 
@@ -36,16 +37,16 @@ public class Translatable {
     }
 
 
-    public void sendSystemMessage(Player player, String... args) {
-        player.sendSystemMessage(get(args));
+    public void sendSystemMessage(Player player) {
+        player.sendSystemMessage(get());
     }
 
-    public void sendSystemMessage(Player player, ChatFormatting[] formatting, String... args) {
-        player.sendSystemMessage(get(args).withStyle(formatting));
+    public void sendSystemMessage(Player player, ChatFormatting[] formatting) {
+        player.sendSystemMessage(get().withStyle(formatting));
     }
 
-    public void sendSystemMessage(Player player, ChatFormatting formatting, String... args) {
-        sendSystemMessage(player, new ChatFormatting[]{formatting}, args);
+    public void sendSystemMessage(Player player, ChatFormatting formatting) {
+        sendSystemMessage(player, new ChatFormatting[]{formatting});
     }
 
 }

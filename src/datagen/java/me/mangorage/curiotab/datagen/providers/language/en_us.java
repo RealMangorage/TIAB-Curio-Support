@@ -1,13 +1,11 @@
 package me.mangorage.curiotab.datagen.providers.language;
 
-import me.mangorage.curiotiab.common.core.Translatable;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.common.data.LanguageProvider;
 
 import static me.mangorage.curiotiab.common.core.Constants.MODID;
 import static me.mangorage.curiotiab.common.core.Translatable.*;
 
-public class en_us extends LanguageProvider {
+public class en_us extends ModdedLanguageProvider {
     public en_us(DataGenerator gen) {
         super(gen, MODID, "en_us");
     }
@@ -31,9 +29,4 @@ public class en_us extends LanguageProvider {
         add(SCREEN_SAVE, "Shift + S to save overlay settings");
         add(COMMAND_RELOAD_CLIENT, "Reload Client Configs");
     }
-
-    private void add(Translatable translatable, String value) {
-        add(translatable.getKey(), value);
-    }
-
 }

@@ -18,8 +18,6 @@ public class DataGeneration {
         final var generator = event.getGenerator();
 
         generator.addProvider(event.includeServer(), new ItemTagGen(generator, event.includeServer(), new BlockTagsGen(generator, helper), helper));
-
-
         generator.addProvider(event.includeClient(), new en_us(generator));
     }
 }
