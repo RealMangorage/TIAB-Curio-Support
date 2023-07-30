@@ -1,6 +1,5 @@
 {
   "size": 1,
-  "icon": "curios:slot/empty_tiab",
-  "add_cosmetic": true,
+  "icon": "curiotiab:slot/empty_tiab",
   "operation": "ADD"
 }

@@ -1,13 +1,14 @@
 package me.mangorage.curiotab.datagen.providers.language;
 
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 
 import static me.mangorage.curiotiab.common.core.Constants.MODID;
 import static me.mangorage.curiotiab.common.core.Translatable.*;
 
 public class en_us extends ModdedLanguageProvider {
-    public en_us(DataGenerator gen) {
-        super(gen, MODID, "en_us");
+    public en_us(PackOutput output) {
+        super(output, MODID, "en_us");
     }
 
     @Override

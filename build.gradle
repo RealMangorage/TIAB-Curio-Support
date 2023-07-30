@@ -16,6 +16,10 @@ sourceSets {
         runtimeClasspath += sourceSets.main.output
     }
 
+    tests {
+        compileClasspath += configurations.getByName("minecraft")
+    }
+
     main {
         java {
             srcDir "src/main/java"
@@ -122,9 +126,14 @@ dependencies {
         implementation fg.deobf("curse.maven:time-in-a-bottle-forge-895919:4669705")
     }
 
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+${mc_version}")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+${mc_version}:api")
+    if (mc_version.contains("1.19.2")) {
+        // DO stuff
+    } else if (mc_version.contains("1.20.1")) {
+        runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+${mc_version}")
+        implementation fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+${mc_version}:api")
+    }
 }
+
 
 jar {
     finalizedBy('reobfJar')
