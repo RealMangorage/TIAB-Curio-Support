@@ -7,6 +7,7 @@ import me.mangorage.curiotiab.common.core.Translatable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.apache.commons.lang3.mutable.MutableInt;
@@ -59,18 +60,18 @@ public class ConfigurationScreen extends Screen {
     }
 
     @Override
-    public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         if (!minecraft.isRunning())
             return;
 
 
         int cX = getClampedWidth(x, minecraft.screen.width, maxWidth);
         int cY = getClampedHeight(y, minecraft.screen.height, font.lineHeight * components.size());
-        renderBackground(pPoseStack);
+        renderBackground(pGuiGraphics);
 
         MutableInt finalID = new MutableInt(0);
         components.forEach(component ->
-                drawString(pPoseStack, font, component, cX, cY + (font.lineHeight * (finalID.getAndAdd(1))), 128)
+                pGuiGraphics.drawString(font, component, cX, cY + (font.lineHeight * (finalID.getAndAdd(1))), 128)
         );
     }
 

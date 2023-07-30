@@ -8,6 +8,7 @@ version = "${mc_version}-${mod_version}"
 archivesBaseName = 'curiotiab'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
 sourceSets {
     datagen {
         compileClasspath += configurations.getByName("minecraft")
@@ -25,6 +26,7 @@ sourceSets {
         }
     }
 }
+
 
 minecraft {
     mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
@@ -115,20 +117,14 @@ dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
     if (mc_version.contentEquals("1.19.2")) {
-        OnlyBoth(fg.deobf("${tiab_mod}:3879896"))
+        implementation fg.deobf("curse.maven:time-in-a-bottle-standalone-445025")
+    } else if (mc_version.contains("1.20.1")) {
+        implementation fg.deobf("curse.maven:time-in-a-bottle-forge-895919:4669705")
     }
 
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${mc_version}-+")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${mc_version}-+:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+${mc_version}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+${mc_version}:api")
 }
-
-
-void OnlyBoth(Dependency dependency) {
-    dependencies.compileOnly(dependency)
-    dependencies.runtimeOnly(dependency)
-}
-
-
 
 jar {
     finalizedBy('reobfJar')

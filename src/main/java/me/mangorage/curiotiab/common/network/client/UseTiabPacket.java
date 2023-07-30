@@ -25,12 +25,12 @@ public class UseTiabPacket {
     private UseTiabPacket() {}
     public static void handle(UseTiabPacket msg, Supplier<NetworkEvent.Context> ctx) {
         ServerPlayer player = ctx.get().getSender();
-        ServerLevel level = player.getLevel();
+        ServerLevel level = player.serverLevel();
 
         if (level != null) {
             ItemStack TiabItemStack = Util.getTiabCurioItemStack(player);
             if (TiabItemStack != ItemStack.EMPTY) {
-                HitResult result = player.pick(player.getReachDistance(), 0, true);
+                HitResult result = player.pick(player.getBlockReach(), 0, true);
                 if (result instanceof BlockHitResult blockHitResult) {
                     UseOnContext context = new UseOnContext(level, player, InteractionHand.MAIN_HAND, TiabItemStack, blockHitResult);
                     TiabItemStack.useOn(context);

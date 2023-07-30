@@ -1,12 +1,11 @@
 package me.mangorage.curiotiab.client.screens.overlays;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import me.mangorage.curiotiab.client.config.CurioTiabClientConfig;
 import me.mangorage.curiotiab.common.core.Util;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -61,7 +60,7 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
     }
 
     @Override
-    public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int screenWidth, int screenHeight) {
+    public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         if (HIDDEN.get())
             return;
 
@@ -89,10 +88,8 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
 
 
                 Lines.forEach((component) ->
-                        GuiComponent.drawString(poseStack, font, component, this.x, this.y + yOffset.getAndAdd(10), 128));
+                        guiGraphics.drawString(font, component, this.x, this.y + yOffset.getAndAdd(10), 128));
             }
         }
     }
-
-
 }

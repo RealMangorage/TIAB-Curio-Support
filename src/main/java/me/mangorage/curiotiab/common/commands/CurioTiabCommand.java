@@ -11,6 +11,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -58,7 +59,7 @@ public class CurioTiabCommand {
                     timeToAdd = currentStoredEnergy / 20;
                 }
 
-                timeToAdd = -timeToAdd;
+                timeToAdd =- timeToAdd;
             }
 
             item.setStoredEnergy(tiabCurioItemStack, currentStoredEnergy + timeToAdd * 20);

@@ -15,18 +15,8 @@ import static me.mangorage.curiotiab.common.core.Constants.MODID;
 @Mod(MODID)
 public class Curiotiab {
     public Curiotiab() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueCompatMessages);
-
         Configs.register();
         NetworkHandler.register();
+    }
 
-    }
-    public void enqueueCompatMessages(final InterModEnqueueEvent evt) {
-        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
-                () -> new SlotTypeMessage.Builder("tiab")
-                        .size(1)
-                        .icon(new ResourceLocation("curios:slot/empty_tiab"))
-                        .build()
-        );
-    }
 }

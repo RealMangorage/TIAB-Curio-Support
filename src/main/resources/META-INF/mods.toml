@@ -1,5 +1,5 @@
 modLoader = "javafml" #mandatory
-loaderVersion = "[43,)"
+loaderVersion = "[47,)"
 license = "MIT"
 issueTrackerURL="https://github.com/RealMangorage/TIAB-Curio-Support/issues"
 
@@ -11,27 +11,27 @@ issueTrackerURL="https://github.com/RealMangorage/TIAB-Curio-Support/issues"
     authors = "MangoRage, RealMangoRage, bananasplit50"
     logoFile="logo.png"
     logoBlur=false
-    credits = "Special Thanks to Forge Support Discord for the help. Thanks to bananasplit50 for making the logo"
+    credits = "Special Thanks to Offical Forge Support Discord for the help. Thanks to bananasplit50 for making the logo!"
     description = '''
         Adds a Curio slot for Time in a bottle
     '''
 [[dependencies.curiotiab]]
     modId="forge"
     mandatory=true
-    versionRange="[40.1.60,)"
+    versionRange="[47,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.curiotiab]]
     modId="curios"
     mandatory=true
-    versionRange="[1.19,)"
+    versionRange="[1.20,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.curiotiab]]
     modId="tiab"
     mandatory=true
-    versionRange="[1.19,)"
+    versionRange="[1.20,)"
     ordering="NONE"
     side="BOTH"
