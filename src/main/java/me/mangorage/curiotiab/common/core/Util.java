@@ -1,19 +1,17 @@
 package me.mangorage.curiotiab.common.core;
 
-import com.haoict.tiab.items.AbstractTiabItem;
+import com.haoict.tiab.Tiab;
+import com.haoict.tiab.common.core.ItemRegistry;
+import com.haoict.tiab.common.items.AbstractTiabItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 import static me.mangorage.curiotiab.common.core.Constants.MODID;
 
@@ -21,7 +19,7 @@ import static me.mangorage.curiotiab.common.core.Constants.MODID;
 public class Util {
 
     public final static Optional<SlotResult> getTiabSlotResult(Player player) {
-        return CuriosApi.getCuriosHelper().findFirstCurio(player, Constants.TIAB_ITEM);
+        return CuriosApi.getCuriosHelper().findFirstCurio(player, ItemRegistry.timeInABottleItem.get());
     }
     public final static ItemStack getTiabCurioItemStack(Player player) {
         return getTiab(getTiabSlotResult(player));

@@ -115,6 +115,13 @@ repositories {
     maven {
         url = "https://maven.theillusivec4.top/"
     }
+    flatDir {
+        dirs "libs\\"
+    }
+}
+
+configurations {
+    embed
 }
 
 dependencies {
@@ -123,7 +130,9 @@ dependencies {
     if (mc_version.contentEquals("1.19.2")) {
         implementation fg.deobf("curse.maven:time-in-a-bottle-standalone-445025")
     } else if (mc_version.contains("1.20.1")) {
-        implementation fg.deobf("curse.maven:time-in-a-bottle-forge-895919:4669705")
+        //implementation fg.deobf("curse.maven:time-in-a-bottle-forge-895919:4669705")
+        //implementation fg.deobf("haciot:time-in-a-bottle-4.0.1-mc:1.20.1")
+        implementation fg.deobf("blank:time-in-a-bottle:4.0.1-mc1.20.1")
     }
 
     if (mc_version.contains("1.19.2")) {
