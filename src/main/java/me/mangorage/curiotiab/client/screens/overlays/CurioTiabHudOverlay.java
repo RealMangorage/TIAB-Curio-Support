@@ -1,5 +1,6 @@
 package me.mangorage.curiotiab.client.screens.overlays;
 
+import com.magorage.tiab.api.ITimeInABottleAPI;
 import me.mangorage.curiotiab.client.config.CurioTiabClientConfig;
 import me.mangorage.curiotiab.common.core.Util;
 import net.minecraft.ChatFormatting;
@@ -9,10 +10,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -34,11 +33,16 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
     }
 
     private final AtomicBoolean HIDDEN = new AtomicBoolean(true);
+    private ITimeInABottleAPI API = null;
     private int x, y = 5;
     private boolean check = true;
 
     private CurioTiabHudOverlay() {
+    }
 
+    public void setAPI(ITimeInABottleAPI api) {
+        if (this.API != null) return;
+        this.API = api;
     }
 
     public void setPosition(int x, int y) {
@@ -81,11 +85,8 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
                 if (CurioTiabClientConfig.useHeader())
                     Lines.add(0, Component.literal("Time in a Bottle Curio").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GOLD));
 
-                TIAB.getTooltipLines(player, TooltipFlag.Default.NORMAL).forEach((component -> {
-                    if (component.getString().contains("Stored time") || component.getString().contains("Total accumulated time"))
-                        Lines.add(component);
-                }));
-
+                Lines.add(API.getStoredTimeTranslated(TIAB));
+                Lines.add(API.getTotalTimeTranslated(TIAB));
 
                 Lines.forEach((component) ->
                         guiGraphics.drawString(font, component, this.x, this.y + yOffset.getAndAdd(10), 128));
