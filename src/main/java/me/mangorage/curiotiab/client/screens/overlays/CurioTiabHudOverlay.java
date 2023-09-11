@@ -18,18 +18,23 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CurioTiabHudOverlay implements IGuiOverlay {
+    public enum Mode {
+        TOTAL,
+        CURRENT,
+        BOTH
+    }
     private final static CurioTiabHudOverlay INSTANCE = new CurioTiabHudOverlay();
 
-    public final static CurioTiabHudOverlay getInstance() {
+    public static CurioTiabHudOverlay getInstance() {
         return INSTANCE;
     }
 
-    public final static void setHidden(boolean value) {
+    public static void setHidden(boolean value) {
         getInstance().HIDDEN.set(value);
     }
 
-    public final static boolean isHidden() {
-        return getInstance().HIDDEN.get() ? true : false;
+    public static boolean isHidden() {
+        return getInstance().HIDDEN.get();
     }
 
     private final AtomicBoolean HIDDEN = new AtomicBoolean(true);
@@ -49,11 +54,13 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
         this.x = x;
         this.y = y;
 
-        CurioTiabClientConfig.POSX.set(x);
-        CurioTiabClientConfig.POSY.set(y);
+        CurioTiabClientConfig.setPOSX(x);
+        CurioTiabClientConfig.setPOSY(y);
 
-        CurioTiabClientConfig.POSX.save();
-        CurioTiabClientConfig.POSY.save();
+        CurioTiabClientConfig.save(
+                CurioTiabClientConfig.Type.POSX,
+                CurioTiabClientConfig.Type.POSY
+        );
 
         CurioTiabClientConfig.invalidateCache(CurioTiabClientConfig.Type.POSX);
         CurioTiabClientConfig.invalidateCache(CurioTiabClientConfig.Type.POSY);
@@ -85,8 +92,14 @@ public class CurioTiabHudOverlay implements IGuiOverlay {
                 if (CurioTiabClientConfig.useHeader())
                     Lines.add(0, Component.literal("Time in a Bottle Curio").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.GOLD));
 
-                Lines.add(API.getStoredTimeTranslated(TIAB));
-                Lines.add(API.getTotalTimeTranslated(TIAB));
+                switch (CurioTiabClientConfig.getOverlayMode()) {
+                    case TOTAL -> Lines.add(API.getTotalTimeTranslated(TIAB));
+                    case CURRENT -> Lines.add(API.getStoredTimeTranslated(TIAB));
+                    case BOTH -> {
+                        Lines.add(API.getStoredTimeTranslated(TIAB));
+                        Lines.add(API.getTotalTimeTranslated(TIAB));
+                    }
+                }
 
                 Lines.forEach((component) ->
                         guiGraphics.drawString(font, component, this.x, this.y + yOffset.getAndAdd(10), 128));
