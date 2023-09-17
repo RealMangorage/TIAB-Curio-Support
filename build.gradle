@@ -103,6 +103,9 @@ minecraft {
 
 repositories {
     maven {
+        url "https://s01.oss.sonatype.org/service/local/repositories/releases/content/io/github/realmangorage/"
+    }
+    maven {
         url "https://cursemaven.com"
         content {
             includeGroup "curse.maven"
@@ -110,9 +113,6 @@ repositories {
     }
     maven {
         url = "https://maven.theillusivec4.top/"
-    }
-    flatDir {
-        dirs "libs\\"
     }
 }
 
@@ -124,8 +124,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
 
-    implementation fg.deobf("curse.maven:time-in-a-bottle-forge-895919:4744787") // TIAB mod
-    //compileOnly fg.deobf("curse.maven:time-in-a-bottle-forge-895919:4744788") // TIAB api
+    runtimeOnly fg.deobf("curse.maven:time-in-a-bottle-forge-895919:4744787") // TIAB mod
+    implementation fg.deobf("org.mangorage:tiab:1.0.0:api") // TIAB api
 
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+${mc_version}")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.3+${mc_version}:api")
