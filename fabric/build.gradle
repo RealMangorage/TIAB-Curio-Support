@@ -7,6 +7,18 @@ repositories {
     maven {
         url = "https://maven.minecraftforge.net/"
     }
+    maven {
+        url "https://cursemaven.com"
+    }
+    mavenCentral()
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+    maven {
+        name = "Ladysnake Libs"
+        url = 'https://maven.ladysnake.org/releases'
+    }
 }
 
 dependencies {
@@ -17,6 +29,9 @@ dependencies {
     }
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+
+    modImplementation "curse.maven:time-in-a-bottle-universal-895919:6055928"
+    modImplementation "dev.emi:trinkets:3.10.0"
 }
 
 loom {

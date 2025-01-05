@@ -1,12 +1,11 @@
 package org.mangorage.tiabcurio.neoforge.datagen;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.tags.BlockTags;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import org.mangorage.tiabcurio.common.Constants;
+import org.mangorage.tiabcurio.common.core.Constants;
 
 @EventBusSubscriber(modid = Constants.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class Datagen {

@@ -22,7 +22,7 @@ repositories {
 
 dependencies {
     implementation 'top.theillusivec4.curios:curios-neoforge:9.0.15+1.21.1'
-    implementation("org.mangorage:tiab:common-api-1.21-1.1.0")
+
     implementation "curse.maven:time-in-a-bottle-universal-895919:6055930"
 }
 

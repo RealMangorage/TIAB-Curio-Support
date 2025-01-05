@@ -1,0 +1,4 @@
+{
+  "icon": "tiabcurio:slot/empty_tiab",
+  "validator_predicates": [ "trinkets:tag" ]
+}

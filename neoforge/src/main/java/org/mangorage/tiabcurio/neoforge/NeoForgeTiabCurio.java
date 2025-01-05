@@ -2,13 +2,12 @@ package org.mangorage.tiabcurio.neoforge;
 
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.mangorage.tiab.common.api.ICommonTimeInABottleAPI;
 import org.mangorage.tiabcurio.common.CommonTIabCurio;
-import org.mangorage.tiabcurio.common.Constants;
+import org.mangorage.tiabcurio.common.core.Constants;
 import org.mangorage.tiabcurio.common.network.client.UseBottlePacket;
 import org.mangorage.tiabcurio.neoforge.network.Handler;
 import top.theillusivec4.curios.api.CuriosApi;

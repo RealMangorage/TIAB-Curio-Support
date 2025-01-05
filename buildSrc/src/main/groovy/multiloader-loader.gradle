@@ -20,7 +20,7 @@ dependencies {
     commonJava project(path: ':common', configuration: 'commonJava')
     commonResources project(path: ':common', configuration: 'commonResources')
 
-    compileOnly("org.mangorage:tiab:common-api-1.21-1.0.0")
+    compileOnly("org.mangorage:tiab:common-api-1.21-1.1.0")
 }
 
 tasks.named('compileJava', JavaCompile) {

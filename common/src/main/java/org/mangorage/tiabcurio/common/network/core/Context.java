@@ -1,4 +1,4 @@
-package org.mangorage.tiabcurio.common.network;
+package org.mangorage.tiabcurio.common.network.core;
 
 import net.minecraft.server.level.ServerPlayer;
 

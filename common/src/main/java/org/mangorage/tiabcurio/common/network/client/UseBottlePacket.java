@@ -10,9 +10,9 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.mangorage.tiabcurio.common.CommonTIabCurio;
-import org.mangorage.tiabcurio.common.Constants;
-import org.mangorage.tiabcurio.common.network.Context;
-import org.mangorage.tiabcurio.common.network.IHandler;
+import org.mangorage.tiabcurio.common.core.Constants;
+import org.mangorage.tiabcurio.common.network.core.Context;
+import org.mangorage.tiabcurio.common.network.core.IHandler;
 
 import java.util.function.Supplier;
 

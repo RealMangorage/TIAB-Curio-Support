@@ -5,7 +5,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import org.mangorage.tiabcurio.common.Constants;
+import org.mangorage.tiabcurio.common.core.Constants;
 import org.mangorage.tiabcurio.common.client.ClientConstants;
 import org.mangorage.tiabcurio.common.network.client.UseBottlePacket;
 
