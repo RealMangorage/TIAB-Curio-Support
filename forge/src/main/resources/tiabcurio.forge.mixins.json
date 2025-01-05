@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.mangorage.tiabcurio.mixin",
+  "package": "org.mangorage.tiabcurio.fabric.mixin",
   "compatibilityLevel": "JAVA_18",
   "mixins": [],
   "client": [],

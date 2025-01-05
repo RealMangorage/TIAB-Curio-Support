@@ -16,7 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "org.mangorage.tiabcurio.TiabCurio"
+      "org.mangorage.tiabcurio.fabric.FabricTiabCurio"
     ]
   },
   "mixins": [
