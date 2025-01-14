@@ -8,8 +8,7 @@
     "${mod_author}"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "${mod_url}"
   },
   "license": "${license}",
   "icon": "${mod_id}.png",
@@ -24,12 +23,10 @@
     "${mod_id}.fabric.mixins.json"
   ],
   "depends": {
+    "trinkets": "*",
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": "*",
     "minecraft": "${minecraft_version}",
     "java": ">=${java_version}"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }
