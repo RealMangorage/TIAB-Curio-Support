@@ -22,7 +22,7 @@ public record UseBottlePacket() implements CustomPacketPayload {
 
         if (level != null) {
             ItemStack TiabItemStack = CommonTiabCurio.getCurioItemStackSearch().findItem(player);
-            if (TiabItemStack != ItemStack.EMPTY) {
+            if (TiabItemStack != null && TiabItemStack != ItemStack.EMPTY) {
                 HitResult result = player.pick(player.getAttributes().getValue(Attributes.BLOCK_INTERACTION_RANGE), 0, true);
                 if (result instanceof BlockHitResult blockHitResult) {
                     UseOnContext context = new UseOnContext(level, player, player.getUsedItemHand(), TiabItemStack, blockHitResult);
