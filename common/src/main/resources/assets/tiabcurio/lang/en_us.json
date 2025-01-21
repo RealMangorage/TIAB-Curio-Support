@@ -1,4 +1,6 @@
 {
   "key.usetiab" : "Use Time in a bottle",
-  "category.tiabcurio" : "Time in a Bottle Curio Keybinds"
+  "category.tiabcurio" : "Time in a Bottle Curio Keybinds",
+  "curios.identifier.tiab" : "Time in a bottle",
+  "trinkets.slot.tiab.charm" : "Time in a bottle"
 }

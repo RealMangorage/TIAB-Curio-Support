@@ -1,21 +1,22 @@
 package org.mangorage.tiabcurio.neoforge;
 
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.mangorage.tiab.common.api.ICommonTimeInABottleAPI;
-import org.mangorage.tiabcurio.common.CommonTIabCurio;
+import org.mangorage.tiabcurio.common.CommonTiabCurio;
 import org.mangorage.tiabcurio.common.core.Constants;
 import org.mangorage.tiabcurio.common.network.client.UseBottlePacket;
-import org.mangorage.tiabcurio.neoforge.network.Handler;
+import org.mangorage.tiabcurio.common.network.core.Context;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.concurrent.atomic.AtomicReference;
 
 @Mod(Constants.MOD_ID)
-public class NeoForgeTiabCurio extends CommonTIabCurio {
+public final class NeoForgeTiabCurio extends CommonTiabCurio {
 
     public NeoForgeTiabCurio(IEventBus modBus) {
         super(player -> {
@@ -39,7 +40,7 @@ public class NeoForgeTiabCurio extends CommonTIabCurio {
                 .playToServer(
                         UseBottlePacket.TYPE,
                         StreamCodec.unit(new UseBottlePacket()),
-                        Handler::handle
+                        (p, c) -> p.handle(new Context((ServerPlayer) c.player(), state -> {}))
                 );
     }
 }

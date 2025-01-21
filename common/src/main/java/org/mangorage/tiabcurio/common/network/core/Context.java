@@ -2,7 +2,6 @@ package org.mangorage.tiabcurio.common.network.core;
 
 import net.minecraft.server.level.ServerPlayer;
 
-public abstract class Context {
-    abstract public ServerPlayer getSender();
-    abstract public void setPacketHandled(boolean flag);
-}
+import java.util.function.Consumer;
+
+public record Context(ServerPlayer player, Consumer<Boolean> handled) { }

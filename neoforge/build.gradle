@@ -9,8 +9,8 @@ repositories {
         url = "https://maven.minecraftforge.net/"
     }
     maven {
-        name = "OctoStudios"
-        url = uri("https://maven.octo-studios.com/releases")
+        name = "Curios"
+        url = uri("https://maven.theillusivec4.top/")
     }
     maven {
         url = "https://maven.minecraftforge.net/"
@@ -21,7 +21,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'top.theillusivec4.curios:curios-neoforge:9.0.15+1.21.1'
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:9.2.2+1.21.1"
+    compileOnly "top.theillusivec4.curios:curios-neoforge:9.2.2+1.21.1:api"
 
     implementation "curse.maven:time-in-a-bottle-universal-895919:6055930"
 }

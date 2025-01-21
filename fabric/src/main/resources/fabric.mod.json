@@ -16,6 +16,9 @@
   "entrypoints": {
     "main": [
       "org.mangorage.tiabcurio.fabric.FabricTiabCurio"
+    ],
+    "client": [
+      "org.mangorage.tiabcurio.fabric.FabricClientTiabCurio"
     ]
   },
   "mixins": [
@@ -26,6 +29,7 @@
     "trinkets": "*",
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": "*",
+    "tiab": ">=6.4.1",
     "minecraft": "${minecraft_version}",
     "java": ">=${java_version}"
   }

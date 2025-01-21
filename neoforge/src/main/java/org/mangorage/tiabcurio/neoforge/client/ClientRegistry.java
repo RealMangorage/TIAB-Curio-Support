@@ -16,7 +16,7 @@ public class ClientRegistry {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null) {
             if (ClientConstants.USE_BOTTLE.consumeClick())
-                Minecraft.getInstance().getConnection().send(new UseBottlePacket());
+                mc.getConnection().send(new UseBottlePacket());
         }
     }
 

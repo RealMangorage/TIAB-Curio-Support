@@ -2,14 +2,14 @@ package org.mangorage.tiabcurio.common;
 
 import org.mangorage.tiab.common.api.ITiabItemSearch;
 
-public abstract class CommonTIabCurio {
+public abstract class CommonTiabCurio {
     private static ITiabItemSearch curioItemStackSearch;
 
     public static ITiabItemSearch getCurioItemStackSearch() {
         return curioItemStackSearch;
     }
 
-    public CommonTIabCurio(ITiabItemSearch search) {
-        CommonTIabCurio.curioItemStackSearch = search;
+    public CommonTiabCurio(ITiabItemSearch search) {
+        CommonTiabCurio.curioItemStackSearch = search;
     }
 }
