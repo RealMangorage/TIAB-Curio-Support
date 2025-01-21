@@ -17,7 +17,6 @@ public class ItemTagGen extends ItemTagsProvider {
         super(pOutput, pLookupProvider, pBlockTags);
     }
 
-
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         final var key = TagKey.create(BuiltInRegistries.ITEM.key(), ResourceLocation.fromNamespaceAndPath("curios", "tiab"));

@@ -13,7 +13,6 @@ import org.mangorage.tiabcurio.common.network.client.UseBottlePacket;
 public class ClientRegistry {
     @SubscribeEvent
     public static void onKeyInput(final ClientTickEvent.Post evt) {
-
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null) {
             if (ClientConstants.USE_BOTTLE.consumeClick())

@@ -35,7 +35,7 @@ public class NeoForgeTiabCurio extends CommonTIabCurio {
     }
 
     public void onNetwork(final RegisterPayloadHandlersEvent event) {
-        event.registrar("1.0.0")
+        event.registrar(Constants.PACKET_VERSION)
                 .playToServer(
                         UseBottlePacket.TYPE,
                         StreamCodec.unit(new UseBottlePacket()),

@@ -33,3 +33,10 @@ modId = "curios"
 type = "required"
 ordering = "BEFORE"
 side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "tiab"
+type = "required"
+versionRange = "[6.4.0,)"
+ordering = "AFTER"
+side = "BOTH"
